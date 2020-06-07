@@ -47,6 +47,13 @@ class MovieViewSet(viewsets.ModelViewSet):
             }
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
+
+class RatingViewSet(viewsets.ModelViewSet):
+    queryset = Rating.objects.all()
+    serializer_class = RatingSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
     def update(self, request, *args, **kwargs):
         response = {
             'message': 'You cant update rating through this process'
@@ -58,13 +65,6 @@ class MovieViewSet(viewsets.ModelViewSet):
             'message': 'You cant create the rating through this process'
         }
         return Response(response, status=status.HTTP_400_BAD_REQUEST)
-
-
-class RatingViewSet(viewsets.ModelViewSet):
-    queryset = Rating.objects.all()
-    serializer_class = RatingSerializer
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
 
 
 class UserViewSet(viewsets.ModelViewSet):
